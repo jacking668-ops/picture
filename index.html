@@ -17,17 +17,16 @@
         .image-container {
             position: relative;
             display: inline-block;
-            margin-top: 20px;
+            margin: 20px;
         }
 
         .image-container img {
             width: 400px;
             border-radius: 10px;
             user-select: none;
-            pointer-events: none; /* basic protection */
+            pointer-events: none;
         }
 
-        /* Watermark */
         .watermark {
             position: absolute;
             bottom: 10px;
@@ -40,15 +39,12 @@
             border-radius: 5px;
         }
 
-        /* Disable right click */
         body {
-            -webkit-user-select: none;
-            -ms-user-select: none;
             user-select: none;
         }
 
         .download-btn {
-            margin-top: 15px;
+            margin-top: 10px;
             padding: 10px 20px;
             background-color: #007BFF;
             color: white;
@@ -67,22 +63,25 @@
 
     <h1>Welcome to My First Page</h1>
 
+    <!-- Image 1 -->
     <div class="image-container">
-        <!-- Replace 'Stars_1.jpg' with your image file -->
-        <img src="Stars_1.jpg" alt="My Image">
-        <img src="Stars_2.jpg" alt="My Image 2">
-
+        <img src="Stars_1.jpg" alt="Image 1">
         <div class="watermark">© JCCT</div>
+        <br>
+        <a href="Stars_1.jpg" download>
+            <button class="download-btn">Download Image 1</button>
+        </a>
     </div>
 
-    <br>
-
-    <!-- Download button -->
-    <a href="Stars_1.jpg" download>
-        <button class="download-btn">Download Image</button>
-    <a href="Stars_2.jpg" download>
-        <button class="download-btn">Download Image</button>
-    </a>
+    <!-- Image 2 -->
+    <div class="image-container">
+        <img src="Stars_2.jpg" alt="Image 2">
+        <div class="watermark">© JCCT</div>
+        <br>
+        <a href="Stars_2.jpg" download>
+            <button class="download-btn">Download Image 2</button>
+        </a>
+    </div>
 
 </body>
 </html>
