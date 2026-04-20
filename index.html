@@ -10,41 +10,13 @@
             background-color: #f4f4f4;
         }
 
-        h1 {
-            margin-top: 20px;
-        }
-
-        .image-container {
-            position: relative;
-            display: inline-block;
+        canvas {
             margin: 20px;
-        }
-
-        .image-container img {
-            width: 400px;
             border-radius: 10px;
-            user-select: none;
-            pointer-events: none;
-        }
-
-        .watermark {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 18px;
-            font-weight: bold;
-            background: rgba(0,0,0,0.3);
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
-
-        body {
-            user-select: none;
         }
 
         .download-btn {
-            margin-top: 10px;
+            margin: 10px;
             padding: 10px 20px;
             background-color: #007BFF;
             color: white;
@@ -58,30 +30,53 @@
         }
     </style>
 </head>
+<body>
 
-<body oncontextmenu="return false;">
+<h1>Welcome to My First Page</h1>
 
-    <h1>Welcome to My First Page</h1>
+<!-- Canvas for images -->
+<canvas id="canvas1" width="400"></canvas><br>
+<button class="download-btn" onclick="downloadImage('canvas1')">Download Image 1</button>
 
-    <!-- Image 1 -->
-    <div class="image-container">
-        <img src="Stars_1.jpg" alt="Image 1">
-        <div class="watermark">© JCCT</div>
-        <br>
-        <a href="Stars_1.jpg" download>
-            <button class="download-btn">Download Image 1</button>
-        </a>
-    </div>
+<br>
 
-    <!-- Image 2 -->
-    <div class="image-container">
-        <img src="Stars_2.jpg" alt="Image 2">
-        <div class="watermark">© JCCT</div>
-        <br>
-        <a href="Stars_2.jpg" download>
-            <button class="download-btn">Download Image 2</button>
-        </a>
-    </div>
+<canvas id="canvas2" width="400"></canvas><br>
+<button class="download-btn" onclick="downloadImage('canvas2')">Download Image 2</button>
+
+<script>
+function addWatermark(canvasId, imageSrc, text) {
+    const canvas = document.getElementById(canvasId);
+    const ctx = canvas.getContext("2d");
+    const img = new Image();
+
+    img.src = imageSrc;
+    img.onload = function () {
+        canvas.height = img.height * (400 / img.width);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        // Watermark text inside image
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "rgba(255,255,255,0.7)";
+        ctx.fillRect(canvas.width - 130, canvas.height - 40, 120, 30);
+
+        ctx.fillStyle = "black";
+        ctx.fillText(text, canvas.width - 120, canvas.height - 18);
+    };
+}
+
+// Apply watermark to both images
+addWatermark("canvas1", "Stars_1.jpg", "© JCCT");
+addWatermark("canvas2", "Stars_2.jpg", "© JCCT");
+
+// Download function
+function downloadImage(canvasId) {
+    const canvas = document.getElementById(canvasId);
+    const link = document.createElement("a");
+    link.download = canvasId + ".png";
+    link.href = canvas.toDataURL();
+    link.click();
+}
+</script>
 
 </body>
 </html>
